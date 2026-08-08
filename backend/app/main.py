@@ -2,12 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.test import router as test_router
+from app.api.nurseries import router as nursery_router
 
 app = FastAPI(
     title="GreenTwin AI API",
     description="AI-powered afforestation monitoring and decision support platform",
     version="0.1.0",
 )
+
+app.include_router(nursery_router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
