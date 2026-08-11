@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.ai import router as ai_router
+from app.api.monitoring import router as monitoring_router
 from app.api.test import router as test_router
 from app.api.nurseries import router as nursery_router
+from app.api.plantations import router as plantation_router
+from app.api.saplings import router as sapling_router
 
 app = FastAPI(
     title="GreenTwin AI API",
@@ -11,6 +15,10 @@ app = FastAPI(
 )
 
 app.include_router(nursery_router, prefix="/api")
+app.include_router(sapling_router, prefix="/api")
+app.include_router(plantation_router, prefix="/api")
+app.include_router(monitoring_router, prefix="/api")
+app.include_router(ai_router, prefix="/api/ai")
 
 app.add_middleware(
     CORSMiddleware,
